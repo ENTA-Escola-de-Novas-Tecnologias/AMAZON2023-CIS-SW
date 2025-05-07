@@ -122,7 +122,7 @@ get_audit_binary_method: download
 ## if get_audit_binary_method - copy the following needs to be updated for your environment
 ## it is expected that it will be copied from somewhere accessible to the control node
 ## e.g copy from ansible control node to remote host
-audit_bin_copy_location: /some/accessible/path
+audit_bin_copy_location: /usr/local/bin
 
 # how to get audit files onto host options
 # options are git/copy/archive/get_url other e.g. if you wish to run from already downloaded conf
@@ -136,10 +136,10 @@ audit_conf_source: "some path or url to copy from"
 
 # Destination for the audit content to be placed on managed node
 # note may not need full path e.g. /opt with the directory being the {{ benchmark }}-Audit directory
-audit_conf_dest: "/opt"
+audit_conf_dest: "/var/opt"
 
 # Where the audit logs are stored
-audit_log_dir: '/opt'
+audit_log_dir: '/var/opt'
 
 ## Ability to collect and take audit files moving to a centralised location
 # This enables the collection of the files from the host
@@ -153,7 +153,7 @@ fetch_audit_output: false
 audit_output_collection_method: fetch
 
 # Location to put the audit files
-audit_output_destination: /opt/audit_summaries/
+audit_output_destination: /var/opt/audit_summaries/
 
 ### Goss Settings ##
 ####### END ########
@@ -474,7 +474,7 @@ amzn2023cis_rule_6_2_11: true
 # "nodev,noexec,nosuid" options are set for "/tmp".
 # If it is set to 'true', the role will use the tmp.mount
 # service otherwise, the role will use the fstab configuration.
-amzn2023cis_tmp_svc: true
+amzn2023cis_tmp_svc: false
 
 ## Control 1.9 - Ensure system-wide crypto policy is not legacy
 # This variable helps in determining which type of crypto policy
@@ -808,7 +808,7 @@ amzn2023cis_sshd:
     # This variable sets the time interval in seconds between sending "keep-alive"
     # messages from the server to the client. These types of messages are intended to
     # keep the connection alive and prevent it from being terminated due to inactivity.
-    clientaliveinterval: 900
+    clientaliveinterval: 800
     # This variable specifies the amount of seconds allowed for successful authentication to
     # the SSH server.
     logingracetime: 60
@@ -1014,7 +1014,7 @@ amzn2023cis_umask: '027'
 # certain tasks from section 5.1. If the chosen option
 # is "rsyslog" then only tasks from 5.1.1.x will be executed.
 # Otherwise, only tasks from 5.1.2.x will be executed.
-amzn2023cis_syslog_service: rsyslog
+amzn2023cis_syslog_service: journald
 ## Control 5.1.1.5 - Ensure logging is configured
 # This variable determines if rsyslog configuration
 # shall be ansible managed or not. If you set it to
@@ -1027,7 +1027,7 @@ amzn2023cis_rsyslog_ansiblemanaged: true
 # ensures rsyslog sends logs to a remote host. If you do not wish for
 # this particular feature to be implemented simply switch the value of
 # the variable to 'false'.
-amzn2023cis_remote_log_server: false
+amzn2023cis_remote_log_server: true
 # This variable holds the name chosen for the remote log host.
 amzn2023cis_remote_log_host: logagg.example.com
 # This variable represents the port number for the remote log host
@@ -1081,7 +1081,7 @@ amzn2023cis_journald_systemmaxuse: 10M
 # This variable represents the amount of disk space to be kept free.
 # If the free disk space falls below this threshold, older logs are
 # deleted to free up space. The value is in gigabytes.
-amzn2023cis_journald_systemkeepfree: 100G
+amzn2023cis_journald_systemkeepfree: 1G
 # This variable is similar to "amzn2023cis_journald_systemmaxuse"
 # only that it refers to in-memory space. "Runtime" is about logs
 # that are stored in memory (RAM) and are not present on disk.
@@ -1093,7 +1093,7 @@ amzn2023cis_journald_runtimemaxuse: 10M
 # "Runtime" is about logs that are stored in memory (RAM) and are not
 # present on disk. These logs are temporary and exist only for the
 # duration of the current system runtime.
-amzn2023cis_journald_runtimekeepfree: 100G
+amzn2023cis_journald_runtimekeepfree: 1G
 # This variable sets the maximum time that logs are retained on disk.
 # Logs older than the specified duration are deleted.
 # Values are Xm, Xh, Xday, Xweek, Xmonth, Xyear.

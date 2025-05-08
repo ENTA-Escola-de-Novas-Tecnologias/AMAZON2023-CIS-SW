@@ -917,10 +917,10 @@ amzn2023cis_authselect_custom_profile_select: false
 # enabling faillock for users.
 # Only to be used on a new clean system that is not using authselect!
 # THIS CAN BREAK ACCESS EVEN FOR ROOT - UNDERSTAND RISKS !!
-amzn2023cis_add_faillock_without_authselect: false
+amzn2023cis_add_faillock_without_authselect: true
 # This needs to be set to "ACCEPT" in order for the option
 # mentioned above to be implemented!
-amzn2023cis_4_4_2_risks: NEVER
+amzn2023cis_4_4_2_risks: ACCEPT
 
 ## Controls 4.4.2, 4.5.2 - faillock configurations
 amzn2023cis_pam_faillock:

@@ -6,7 +6,7 @@
 
   roles:
 
-      - role: "{{ playbook_dir }}"
+    - role: "{{ playbook_dir }}"
 
   post_tasks:
     - name: "1.1.1.1 | PATCH | Ensure mounting of squashfs filesystems is disabled"
